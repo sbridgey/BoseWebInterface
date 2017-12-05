@@ -1,9 +1,18 @@
 <template>
-    <div>
-        <h1>Hello world</h1> 
-        <p>{{helloMessage}}</p>
-        <p>IpAddress is - {{ipAddress}}</p>
-    </div>
+  <div class="col-md-4">
+    <b-jumbotron>
+      <template slot="header">
+        Your Bose
+      </template>
+      <template slot="lead">
+        The IP Address for your bose is - {{ipAddress}}
+      </template>
+      <hr class="my-4">
+      <p>
+        Control your bose from this page
+      </p>
+    </b-jumbotron>
+  </div>
 </template>
 
 <script>
@@ -25,22 +34,6 @@ export default {
         window.RTCPeerConnection ||
         window.mozRTCPeerConnection ||
         window.webkitRTCPeerConnection;
-      //var useWebKit = !!window.webkitRTCPeerConnection;
-
-      //bypass naive webrtc blocking using an iframe
-      if (!RTCPeerConnection) {
-        //NOTE: you need to have an iframe in the page right above the script tag
-        //
-        //<iframe id="iframe" sandbox="allow-same-origin" style="display: none"></iframe>
-        //<script>...getIPs called in here...
-        //
-        // var win = iframe.contentWindow;
-        // RTCPeerConnection =
-        //   win.RTCPeerConnection ||
-        //   win.mozRTCPeerConnection ||
-        //   win.webkitRTCPeerConnection;
-        // useWebKit = !!win.webkitRTCPeerConnection;
-      }
 
       //minimal requirements for data connection
       var mediaConstraints = {
@@ -59,8 +52,7 @@ export default {
         var ipRegex = /([0-9]{1,3}(\.[0-9]{1,3}){3})/
         var ipAddr = ipRegex.exec(candidate)[1]
 
-        //remove duplicates
-        if (ipDups[ipAddr] === undefined) {
+        if (typeof ipAddr !== 'undefined' && ipDups[ipAddr] === undefined) {
           callback(ipAddr)
         }
 
