@@ -2,12 +2,13 @@
   <div class="container">
     <div class="row">
       <homeTile></hometile>
+      <nowPlaying></nowplaying>
     </div>
   </div>
 </template>
 
 <script>
-import homeTile from './homeTile.vue'
+import homeTile from './Tiles/homeTile.vue'
 export default {
   name: 'Home',
   components: {
